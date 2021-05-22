@@ -3,8 +3,10 @@
  const inputBox = document.querySelector(".inputField input");
 const addBtn = document.querySelector(".inputField button");
 const todoList = document.querySelector(".todoList");
-const li = document.querySelector(".todoList li")
+const listt = document.getElementsByClassName(".listt")
 const deleteAllBtn = document.querySelector(".clear ")
+
+
 
  
 // onkeyup event
@@ -51,9 +53,9 @@ function showTasks(){
 
   let newLiTag = "";
   listArray.forEach((element, index) => {
-    newLiTag += `<li><label>${element}</label>
+    newLiTag += `<li class = "listt"><label class = "label">${element}</label>
     <span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span>
-    <span class = "edit" onclick = "editTask(${index})"> <i class = "fas fa-edit"></i></button> </li>`;
+    <span class = "edit" onclick = "editTask(${index})"> <i class = "fas fa-edit"></i></button> onDragOver={this.DragOver}>{allitems.map(createItem,this)} </li>`;
   });
   todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
   inputBox.value = ""; //once task added leave the input field blank
@@ -75,46 +77,39 @@ deleteAllBtn.onclick = ()=>{
   showTasks(); //call the showTasks function
 }
 
-
 var editInput=document.createElement("input");//text
+  //button.edit
+  var editButton=document.createElement("button");//edit button
+
 editInput.type="text";
+
+editButton.innerText="Edit";//innerText encodes special characters, HTML does not.
+  editButton.className="edit";
 
 
 //Edit an existing task.
 
-var editTask=function(){
+function editTask(index){
 console.log("Edit Task...");
 
-var listItem=this.parentNode;
-console.log("Change 'edit' to 'save'");
 
-const inputBox = document.querySelector(".inputField input");
-console.log("Change 'edit' to 'save'");
-var label=document.querySelector("label");
-console.log("Change 'edit' to 'save'");
-var containsClass=todoList.classList.contains("editMode");
-console.log("Change 'edit' to 'save'");
-
-
+var editInput=document.querySelector('input[type=text]');
+var label=document.querySelectorAll('label')[index]
+var containsClass=document.listt.
+contains("editMode");
     //If class of the parent is .editmode
     if(containsClass){
-      console.log("Change 'edit' to 'save'");
 
     //switch to .editmode
     //label becomes the inputs value.
-      label.innerText=inputBox.value;
-       console.log("Change 'edit' to 'save'");
-
+      label.innerText=editInput.value;
     }else{
-       console.log("Change 'edit' to 'save'");
-
-      inputBox.value=label.innerText;
-       console.log("Change 'edit' to 'save'");
-
+      editInput.value=label.innerText;
     }
 
     //toggle .editmode on the parent.
-    label.classList.toggle("editMode");
-     console.log("Change 'edit' to 'save'");
-
+    listItem.classList.toggle("editMode");
 }
+
+
+
